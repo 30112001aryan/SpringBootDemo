@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Predicate;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
     private UserConvertorES userConvertorES;
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     private UserES userES;
+    @Autowired
     private UserRepositoryES userRepositoryES;
     private UserController userController;
     @Override
@@ -58,7 +60,7 @@ public class UserServiceImpl implements UserService {
         return ans;
     }
 
-    @Scheduled(cron = "0 */3 * * * *")
+    @Scheduled(cron = "0 */1 * * * *")
     @Transactional
     public void sync() {
         LOG.info("Start Syncing - {}", LocalDateTime.now());
@@ -72,9 +74,9 @@ public class UserServiceImpl implements UserService {
                 (javax.persistence.criteria.Predicate) getModificationDatePredicate(criteriaBuilder, root);
         List<User> userList;
         if (userRepositoryES.count() == 0) {
-            userList = userES.findAll();
+            userList = userRepository.findAll();
         } else {
-            userList = userES.findAll(userSpecification);
+            userList = userRepository.findAll(userSpecification);
         }
         for(User user: userList) {
             LOG.info("Syncing User - {}", user.getId());

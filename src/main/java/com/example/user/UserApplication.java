@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableElasticsearchRepositories
+
 public class UserApplication {
 
 	public static void main(String[] args) {
