@@ -11,4 +11,6 @@ import java.util.List;
 public interface UserService {
     UserDto create(UserDto userDto);
     List<UserDto> getUserByName(String name);
+
+    List<UserDto> getUserByCode(String code);
 }

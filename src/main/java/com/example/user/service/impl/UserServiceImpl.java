@@ -60,6 +60,17 @@ public class UserServiceImpl implements UserService {
         return ans;
     }
 
+    @Override
+    public List<UserDto> getUserByCode(String code) {
+        List<UserES> usersES= userRepositoryES.getByCode(code);
+        if(Objects.isNull(usersES))return null;
+        List<UserDto> ans=new ArrayList<>();
+        for(UserES user:usersES){
+            ans.add(userConvertorES.convert(user));
+        }
+        return ans;
+    }
+
     @Scheduled(cron = "0 */1 * * * *")
     @Transactional
     public void sync() {

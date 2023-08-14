@@ -24,4 +24,8 @@ public class UserController {
         return userService.getUserByName(name);
     }
 
+    @GetMapping("/findByCode")
+    public List<UserDto> findByCode(@RequestParam("code") String code){
+        return userService.getUserByCode(code);
+    }
 }

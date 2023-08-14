@@ -1,9 +1,6 @@
 package com.example.user.domain;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Entity;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.Id;
@@ -18,7 +15,8 @@ import java.util.List;
 @Document(indexName = "user")
 @Setter
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserES {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
