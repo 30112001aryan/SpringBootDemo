@@ -73,11 +73,8 @@ public class UserServiceImpl implements UserService {
         Specification<User> userSpecification = (root, criteriaQuery, criteriaBuilder) ->
                 (javax.persistence.criteria.Predicate) getModificationDatePredicate(criteriaBuilder, root);
         List<User> userList;
-        if (userRepositoryES.count() == 0) {
-            userList = userRepository.findAll();
-        } else {
-            userList = userRepository.findAll(userSpecification);
-        }
+
+        userList = userRepository.findAll();
         for(User user: userList) {
             LOG.info("Syncing User - {}", user.getId());
             userRepositoryES.save(userConvertorES.convert(user));
