@@ -27,6 +27,8 @@ public class User {
     private String name;
     @Column(name="age")
     private Integer age;
+    @Column(name="code")
+    private String code;
 
     @Override
     public boolean equals(Object o) {

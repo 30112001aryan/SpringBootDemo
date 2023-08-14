@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private UserConvertor userConvertor;
+    @Autowired
     private UserConvertorES userConvertorES;
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     private UserES userES;
@@ -77,7 +78,7 @@ public class UserServiceImpl implements UserService {
         }
         for(User user: userList) {
             LOG.info("Syncing User - {}", user.getId());
-            userRepositoryES.save(userCovertorES.convert(user));
+            userRepositoryES.save(userConvertorES.convert(user));
         }
     }
     public static final Integer INTERVAL_IN_MILLISECOND = 180_000;

@@ -10,13 +10,15 @@ public class UserConvertor {
         UserDto userDto=UserDto.builder()
                 .name(user.getName())
                 .age(user.getAge())
+                .code(user.getCode())
                 .build();
         return userDto;
     }
-    public User convert(UserDto userDto){
-        User user=User.builder()
+    public User convert(UserDto userDto) {
+        User user = User.builder()
                 .name(userDto.getName())
                 .age(userDto.getAge())
+                .code(userDto.getCode())
                 .build();
         return user;
     }
