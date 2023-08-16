@@ -48,11 +48,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUserByName(String name) {
-        List<User> users= userRepository.getByName(name);
+        List<UserES> users= userRepositoryES.findByNameContaining(name);
         if(Objects.isNull(users))return null;
         List<UserDto> ans=new ArrayList<>();
-        for(User user:users){
-            ans.add(userConvertor.convert(user));
+        for(UserES user:users){
+            ans.add(userConvertorES.convert(user));
         }
         return ans;
     }
