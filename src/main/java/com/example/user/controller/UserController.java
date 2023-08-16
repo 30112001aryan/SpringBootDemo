@@ -4,6 +4,7 @@ import com.example.user.domain.User;
 import com.example.user.dtos.UserDto;
 import com.example.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,4 +30,8 @@ public class UserController {
         return userService.getUserByName(name);
     }
 
+    @GetMapping("/searchByName")
+    public List<UserDto> searchByName(@RequestParam("name") String name){
+        return userService.searchByName(name);
+    }
 }

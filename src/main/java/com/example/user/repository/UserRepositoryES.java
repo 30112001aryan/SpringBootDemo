@@ -11,4 +11,7 @@ import java.util.List;
 public interface UserRepositoryES extends ElasticsearchRepository<UserES, String> {
     List<UserES> getByCode(String code);
     List<UserES> findByNameContaining(String name);
+
+    @Query("{\"bool\" : {\"must\" : {\"match\" : {\"name\" : {\"query\" : \"?0\",\"operator\":\"and\",\"fuzziness\":\"AUTO\"}}}}}")
+    List<UserES> findByNameLike(String name);
 }
