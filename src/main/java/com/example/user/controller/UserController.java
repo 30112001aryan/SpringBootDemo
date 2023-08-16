@@ -28,4 +28,10 @@ public class UserController {
     public List<UserDto> findByCode(@RequestParam("code") String code){
         return userService.getUserByCode(code);
     }
+
+    @GetMapping("/findByName")
+    public List<UserDto> getByName(@RequestParam("name") String name){
+        return userService.getUserByName(name);
+    }
+
 }

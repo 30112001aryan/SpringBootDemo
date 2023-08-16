@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Predicate;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -38,10 +37,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserConvertorES userConvertorES;
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-    private UserES userES;
     @Autowired
     private UserRepositoryES userRepositoryES;
-    private UserController userController;
     @Override
     public UserDto create(UserDto userDto){
         User user=userConvertor.convert(userDto);
@@ -62,10 +59,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUserByCode(String code) {
-        List<UserES> usersES= userRepositoryES.getByCode(code);
-        if(Objects.isNull(usersES))return null;
-        List<UserDto> ans=new ArrayList<>();
-        for(UserES user:usersES){
+        List<UserES> usersES = userRepositoryES.getByCode(code);
+        if (Objects.isNull(usersES)) return null;
+        List<UserDto> ans = new ArrayList<>();
+        for (UserES user : usersES) {
             ans.add(userConvertorES.convert(user));
         }
         return ans;

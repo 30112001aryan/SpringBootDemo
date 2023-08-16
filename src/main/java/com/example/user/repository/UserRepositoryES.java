@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface UserRepositoryES extends ElasticsearchRepository<UserES, String> {
-    @Query("{ \"match_all\": {} }")
     List<UserES> getByCode(String code);
+    List<UserES> findByNameContaining(String name);
 }

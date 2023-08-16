@@ -13,7 +13,7 @@ public class UserConvertorES {
                 .withName(userDto.getName())
                 .withAge(userDto.getAge())
                 .withCode(userDto.getCode())
-                .withModificationDate(null)
+                .withModificationDate(userDto.getModificationDate())
                 .build();
         return userES;
     }
@@ -33,7 +33,7 @@ public class UserConvertorES {
                 .withName(user.getName())
                 .withAge(user.getAge())
                 .withCode(user.getCode())
-                .withModificationDate(null)
+                .withModificationDate(user.getModificationDate())
                 .build();
         return userES;
     }
