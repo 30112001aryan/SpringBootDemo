@@ -59,13 +59,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUserByCode(String code) {
-        List<UserES> usersES = userRepositoryES.getByCode(code);
+        List<User> usersES = userRepository.findByCodeContaining(code);
         if (Objects.isNull(usersES)) return null;
         List<UserDto> ans = new ArrayList<>();
-        for (UserES user : usersES) {
-            ans.add(userConvertorES.convert(user));
+        for (User user : usersES) {
+            ans.add(userConvertor.convert(user));
         }
         return ans;
+    }
+    @Override
+    public UserDto update(UserDto userDto, String code) {
+        User user = userRepository.findByCode(code);
+        user.setAge(userDto.getAge());
+        userRepository.save(user);
+        return userConvertor.convert(user);
     }
 
     @Override

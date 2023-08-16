@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface UserRepositoryES extends ElasticsearchRepository<UserES, String> {
-    List<UserES> getByCode(String code);
     List<UserES> findByNameContaining(String name);
 
     @Query("{\"bool\" : {\"must\" : {\"match\" : {\"name\" : {\"query\" : \"?0\",\"operator\":\"and\",\"fuzziness\":\"AUTO\"}}}}}")

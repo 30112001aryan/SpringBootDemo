@@ -4,6 +4,7 @@ import com.example.user.domain.User;
 import com.example.user.dtos.UserDto;
 import com.example.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/findByCode")
+    @Cacheable(value = "code", key = "#code")
     public List<UserDto> findByCode(@RequestParam("code") String code){
         return userService.getUserByCode(code);
     }
@@ -34,4 +36,11 @@ public class UserController {
     public List<UserDto> searchByName(@RequestParam("name") String name){
         return userService.searchByName(name);
     }
+
+    @PostMapping("/update")
+    @CacheEvict(value = "code", key = "#code")
+    public UserDto update(@RequestBody UserDto userDto, @RequestParam("code") String code){
+        return userService.update(userDto, code);
+    }
+
 }

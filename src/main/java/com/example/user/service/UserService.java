@@ -15,4 +15,6 @@ public interface UserService {
 
     List<UserDto> getUserByCode(String code);
     List<UserDto> searchByName(String name);
+
+    UserDto update(UserDto userDto, String code);
 }
